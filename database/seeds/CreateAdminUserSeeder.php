@@ -24,9 +24,26 @@ class CreateAdminUserSeeder extends Seeder
 
         $role = Role::create(['name' => 'Admin']);
 
-        $permissions = Permission::pluck('id','id')->all();
+        $permissions = [
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete',
+            'post-list',
+            'post-create',
+            'post-edit',
+            'post-delete',
+            'user-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
+            'post-comment'
+        ];
 
         $role->syncPermissions($permissions);
+
+
+
 
         $user->assignRole([$role->id]);
         $blog= Blog::create(['user_id' =>  $user->id]);

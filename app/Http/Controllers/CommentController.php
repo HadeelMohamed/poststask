@@ -13,13 +13,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:post-comment', ['only' => ['store']]);
+
+    }
+    ///create comment
     public function store(Request $request)
     {
-        function __construct()
-        {
-            $this->middleware('permission:post-comment', ['only' => ['store']]);
 
-        }
 
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
